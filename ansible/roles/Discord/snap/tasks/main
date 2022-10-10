@@ -1,0 +1,16 @@
+---
+- name: install Discord
+  become: true
+  community.general.snap:
+    name:
+      - discord
+
+- name: Fix apparmor with connection
+  become: true
+  ansible.builtin.command: snap connect discord:system-observe
+  args:
+    creates: /path/to/database
+  when: {{ ansible_os_family }}/{{ ansible_distribution }} == Debian/Ubuntu
+
+# https://snapcraft.io/discord
+# https://discord.com/invite/snapcraft

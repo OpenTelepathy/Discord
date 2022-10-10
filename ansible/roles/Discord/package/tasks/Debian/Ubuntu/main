@@ -1,0 +1,4 @@
+---
+
+- name: install Discord via downloaded .deb
+  include_tasks: "{{ playbook_dir }}/roles/Discord/{{source}}/tasks/{{ ansible_os_family }}/get deb"

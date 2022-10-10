@@ -1,0 +1,8 @@
+---
+- hosts: node
+  vars:
+    # set Default install type
+    source: "package"
+
+  roles:
+  - Discord

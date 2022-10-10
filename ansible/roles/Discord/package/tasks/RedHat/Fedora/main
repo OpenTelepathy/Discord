@@ -1,0 +1,7 @@
+---
+
+- name: Download Discord.tar.gz
+  ansible.builtin.get_url:
+    url: "https://discord.com/api/download?platform=linux&format=tar.gz"
+    dest: /var/uni/apps/
+    # checksum: sha256:d6045b5fe13d54b89ced04eb81fcd79ed7523842b82dd7143e964b13bb79d70c

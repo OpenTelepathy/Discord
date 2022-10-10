@@ -1,0 +1,26 @@
+---
+
+- name: Is Discord installed?
+  shell: which discord
+  register: is_installed
+  ignore_errors: yes
+  failed_when: false
+
+
+- name: Download Discord.deb
+  ansible.builtin.get_url:
+    url: "https://dl.discordapp.net/apps/linux/{{ version }}/discord-{{ version }}.deb"
+    dest: "{{ app_dir }}/Discord.deb"
+    checksum: sha256:d6045b5fe13d54b89ced04eb81fcd79ed7523842b82dd7143e964b13bb79d70c
+  when: is_installed.rc == 0
+
+- name: Install Discord.deb
+  ansible.builtin.apt:
+    deb: "{{ app_dir }}/Discord.deb"
+  become: true
+
+- name: Remove installer
+  ansible.builtin.file:
+    path: "{{ app_dir }}/Discord.deb"
+    state: absent
+  when: not keep_installer and is_installed.rc == 0
