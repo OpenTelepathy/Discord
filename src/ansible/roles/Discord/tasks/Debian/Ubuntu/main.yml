@@ -1,0 +1,19 @@
+---
+    - name: Add Discord repository key
+      apt_key:
+        url: https://dl.discordapp.net/apps/linux/keys.asc
+        state: present
+
+    - name: Add Discord repository
+      apt_repository:
+        repo: deb [arch=amd64] https://dl.discordapp.net/apps/linux/ {{ ansible_distribution_release }} main
+        state: present
+
+    - name: Update apt package cache
+      apt:
+        update_cache: yes
+
+    - name: Install Discord
+      apt:
+        name: discord
+        state: present
