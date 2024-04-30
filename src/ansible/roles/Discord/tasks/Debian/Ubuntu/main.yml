@@ -1,19 +1,15 @@
 ---
-    - name: Add Discord repository key
-      apt_key:
-        url: https://dl.discordapp.net/apps/linux/keys.asc
-        state: present
+# https://www.omgubuntu.co.uk/install-discord-on-ubuntu-linux-mint
 
-    - name: Add Discord repository
-      apt_repository:
-        repo: deb [arch=amd64] https://dl.discordapp.net/apps/linux/ {{ ansible_distribution_release }} main
-        state: present
+- name: Install Snapd
+  ansible.builtin.apt:
+    pkg:
+    - snapd
+  become: true
 
-    - name: Update apt package cache
-      apt:
-        update_cache: yes
-
-    - name: Install Discord
-      apt:
-        name: discord
-        state: present
+- name: Install Discord from Snap
+  community.general.snap:
+    name:
+      - discord
+  become: true
+  # notify: Distrobox export app Snap

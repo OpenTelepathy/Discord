@@ -1,0 +1,12 @@
+---
+- name: Distrobox export app
+  ansible.builtin.shell: distrobox-export --app discord
+  args:
+    creates: somelog.txt
+  when: in_distrobox
+
+- name: Distrobox export app Snap
+  ansible.builtin.shell: distrobox-export --app discord
+  args:
+    creates: somelog.txt
+  when: in_distrobox
